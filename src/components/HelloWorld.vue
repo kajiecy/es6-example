@@ -1,57 +1,72 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="hello">
+        showValue:{{showValue}}
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+    //数组解构
+    let [a, b, c] = [1, 2, 3];
+    let [foo, [[bar], baz]] = [1, [[2], 3]];
+    let [head, ...tail] = [1, 2, 3, 4];
+    //解构时的默认值
+    let [a1, b1 = "222"] = ["111", null];
+    let [a2, b2 = "222"] = ["111", undefined];
+    let isCheckQuery = null === undefined;
+    let [a3 = "1", b3 = a3] = ["2"];
+    //对象解构
+    let {objA, objB} = {objA: "1", objB: "2"};
+    //====上面的 声明等于
+    let {objA2: objA2, objB2: objB2} = {objA2: "1", objB2: "2"};
+    let {objA2: o2, objB2: o3} = {objA2: "1", objB2: "2"};
+    //更复杂的对象解构
+        let objLv1 = {
+            child1: [
+                "value1",
+                {cChild1: "cValue1"},
+                ]
+        };
+        let {child1: [param1, {cChild1: param2}]} = objLv1;
+    //更复杂的对象解构2
+        let objLv2 = {
+            childLv2: {
+                cChildLv2: {
+                    min: 0,
+                    max: 99,
+                }
+            }
+        };
+        let {childLv2, childLv2: {cChildLv2}, childLv2: {cChildLv2: {min, max}}} = objLv2;
+
+    //对象解构的默认值问题
+    var {x: y = 3} = {x: 5};
+
+    //运用
+    let { log, sin, cos } = Math;
+    let arr = [1, 2, 3];
+    let {0 : first, [arr.length - 1] : last} = arr;
+
+
+    export default {
+        data() {
+            return {
+                showValue: last
+            }
+        },
+        created() {
+
+        },
+        mounted() {
+
+        },
+        watch: {},
+        methods: {},
+        computed: {},
+        components: {}
+    }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
