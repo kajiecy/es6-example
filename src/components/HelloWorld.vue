@@ -1,6 +1,13 @@
 <template>
     <div class="hello">
-        showValue:{{showValue}}
+        showValue:{{move({})}}
+        <div>
+            templateString:{{templateStringTest()}}
+            <div style="white-space: pre;">
+                {{templateStringTest()}}
+            </div>
+            <pre style="">{{templateStringTest()}}</pre>
+        </div>
     </div>
 </template>
 
@@ -47,6 +54,9 @@
     let {0 : first, [arr.length - 1] : last} = arr;
 
 
+
+
+
     export default {
         data() {
             return {
@@ -60,7 +70,20 @@
 
         },
         watch: {},
-        methods: {},
+        methods: {
+            //函数的参数解构
+             move({x = 0, y = 0}={}) {
+                return [x, y];
+            },
+            //模板字符串
+            templateStringTest(){
+                let valueA = "111";
+                let valueB = "222";
+                let result = `valueA is ${valueA} <br>
+                          valueB is ${valueB}`;
+                return result;
+            }
+        },
         computed: {},
         components: {}
     }
@@ -68,5 +91,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    pre{
+        font-size: 14px;
+        font-family:宋体;
+        white-space: pre;
+        margin: 0;
+    }
 </style>
